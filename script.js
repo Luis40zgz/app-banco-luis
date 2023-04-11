@@ -154,7 +154,6 @@ const updateUI = (currentAccount) => {
   showMovements(currentAccount)
 }
 const calcAndDisplayBalance = (movements) => {
-  const { value } = movements
   const balance = movements.reduce((acc, curr) => acc + curr, 0)
   labelBalance.textContent = balance.toFixed(2)
 }

@@ -81,6 +81,7 @@ const containerApp = document.querySelector('.app')
 const containerMovements = document.querySelector('.movements')
 
 const btnLogin = document.querySelector('.login__btn')
+const btnLogout = document.querySelector('.logout__btn')
 const btnTransfer = document.querySelector('.form__btn--transfer')
 const btnLoan = document.querySelector('.form__btn--loan')
 const btnClose = document.querySelector('.form__btn--close')
@@ -128,9 +129,23 @@ btnLogin.addEventListener('click', (e) => {
     containerApp.style.opacity = 100
     inputLoginUsername.value = inputLoginPin.value = ''
     inputLoginPin.blur()
+    btnLogin.style.display = 'none'
+    btnLogout.style.display = 'initial'
     updateUI(currentAccount)
   }
 })
+
+// Implementamos un boton de logout
+
+btnLogout.addEventListener('click', (e) => {
+  e.preventDefault()
+  btnLogin.style.display = 'initial'
+  btnLogout.style.display = 'none'
+  labelWelcome.textContent = 'Log in to get started'
+  containerApp.style.opacity = 0
+  logedAccount = null
+})
+
 const updateUI = (currentAccount) => {
   const { movements } = currentAccount
   const values = movements.map(({ value }) => value)
@@ -201,7 +216,7 @@ btnTransfer.addEventListener('click', (e) => {
     amount <= Number(labelBalance.textContent) &&
     amount > 0
   ) {
-    const currentDate = tranferDate()
+    const currentDate = transferDate()
     logedAccount.movements.push({
       date: currentDate,
       value: -amount,
@@ -234,8 +249,24 @@ btnLoan.addEventListener('click', (e) => {
 
 //Implementacion de cerrar cuenta
 
-btnClose.addEventListener('click', (e) => {
+btnClose.addEventListener('click', function (e) {
   e.preventDefault()
+
+  if (
+    inputCloseUsername.value === logedAccount.username &&
+    Number(inputClosePin.value) === logedAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === logedAccount.username
+    )
+    console.log(index)
+    // .indexOf(23)
+    // Delete account
+    accounts.splice(index, 1)
+    // Hide UI
+    containerApp.style.opacity = 0
+  }
+  inputCloseUsername.value = inputClosePin.value = ''
 })
 
 // Implementación de la función sort

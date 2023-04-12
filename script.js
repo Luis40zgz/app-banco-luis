@@ -4,7 +4,7 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 // Data
-const account1 = {
+/*const account1 = {
   owner: 'Juan Sánchez',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
@@ -30,9 +30,20 @@ const account4 = {
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
-}
+}*/
 
-const accounts = [account1, account2, account3, account4]
+async function getAccounts() {
+  const response = await fetch('./usersAccounts.json', {
+    mode: 'cors',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  })
+  return response.json()
+}
+const accounts = getAccounts()
+console.log(accounts)
+//const accounts = [account1, account2, account3, account4]
 
 // Metodo para formatear la fecha en el formato inicial que propone el ejercicio
 const formatDate = (fecha) => {

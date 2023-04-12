@@ -14,11 +14,11 @@ async function writeToFile(fileName, data) {
 const formatDate = (fecha) => {
   const year = fecha.getFullYear()
   const month =
-    fecha.getMonth().toString.length < 2
+    fecha.getMonth().toString().length < 2
       ? `0${fecha.getMonth()}`
       : fecha.getMonth()
   const day =
-    fecha.getDay().toString.length < 2 ? `0${fecha.getDay()}` : fecha.getDay()
+    fecha.getDay().toString().length < 2 ? `0${fecha.getDay()}` : fecha.getDay()
   return `${year}-${month}-${day}`
 }
 
@@ -29,13 +29,32 @@ const users = [
   { name: 'Javier Rodríguez', pin: 4444 },
 ]
 
-const value = faker.finance.amount(-500, 1500)
-const date = formatDate(
-  faker.date.between('2020-01-01T00:00:00.000Z', '2023-01-01T00:00:00.000Z')
-)
-
-const generarDatos = () => {
-  const array = []
-  users.forEach((element) => {})
+const movements = () => {
+  const output = []
+  for (let i = 0; i < 8; i++) {
+    const value = faker.finance.amount(-500, 1500)
+    const date = formatDate(
+      faker.date.between('2020-01-01T00:00:00.000Z', '2023-01-01T00:00:00.000Z')
+    )
+    output[i] = { date: date, value: value }
+  }
+  return output.sort(
+    (a, b) => b.date.split('-').join('') - a.date.split('-').join('')
+  )
 }
-data = generarDatos()
+
+const generarDatos = (users) => {
+  const output = []
+  users.forEach((element, key) => {
+    const interestRate = faker.finance.amount(0.5, 2)
+    output[key] = {
+      owner: element.name,
+      movements: movements(),
+      interestRate: interestRate,
+      pin: element.pin,
+    }
+  })
+  return output
+}
+const data = generarDatos(users)
+writeToFile('usersAccounts.json', JSON.stringify(data))

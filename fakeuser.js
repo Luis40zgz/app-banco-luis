@@ -57,4 +57,4 @@ const generarDatos = (users) => {
   return output
 }
 const data = generarDatos(users)
-writeToFile('usersAccounts.json', JSON.stringify(data))
+writeToFile('./api/usersAccounts.json', JSON.stringify(data))

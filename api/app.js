@@ -1,14 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
-import './usersAccounts.json' assert { type: 'json' }
+import indexRouter from './routes/index.js'
 import cors from 'cors'
-
-var router = express.Router()
-
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.json('./usersAccounts.json')
-})
 
 const PORT = 3000
 
@@ -16,6 +9,9 @@ const PORT = 3000
 const app = express()
 app.use(cors())
 app.use(morgan('dev'))
+
+// definir la ruta raíz
+app.use('/', indexRouter)
 
 // arrancar el servidor por el puerto 3000
 console.log(`Api escuchando por el puert ${PORT}`)

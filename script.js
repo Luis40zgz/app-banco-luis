@@ -33,12 +33,7 @@ const account4 = {
 }*/
 
 async function getAccounts() {
-  const response = await fetch('./usersAccounts.json', {
-    mode: 'cors',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-  })
+  const response = await fetch('localhost/:3010')
   return response.json()
 }
 const accounts = getAccounts()

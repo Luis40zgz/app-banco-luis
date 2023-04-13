@@ -32,14 +32,15 @@ const users = [
 const movements = () => {
   const output = []
   for (let i = 0; i < 8; i++) {
-    const value = faker.finance.amount(-500, 1500)
+    const value = Number(faker.finance.amount(-500, 1500))
     const date = formatDate(
       faker.date.between('2020-01-01T00:00:00.000Z', '2023-01-01T00:00:00.000Z')
     )
     output[i] = { date: date, value: value }
   }
   return output.sort(
-    (a, b) => b.date.split('-').join('') - a.date.split('-').join('')
+    (a, b) =>
+      Number(a.date.split('-').join('')) - Number(b.date.split('-').join(''))
   )
 }
 
@@ -57,4 +58,4 @@ const generarDatos = (users) => {
   return output
 }
 const data = generarDatos(users)
-writeToFile('./api/usersAccounts.json', JSON.stringify(data))
+writeToFile('./api/routes/usersAccounts.json', JSON.stringify(data))

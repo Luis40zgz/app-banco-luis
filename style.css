@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #444;
   background-color: #f3f3f3;
   height: 100vh;
@@ -94,7 +94,6 @@ nav {
   outline: none;
   color: #777;
 }
-
 
 /* MAIN */
 .app {
@@ -219,6 +218,15 @@ nav {
   cursor: pointer;
 }
 
+.btn--sort--rev {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: none;
+}
 /* OPERATIONS */
 .operation {
   border-radius: 1rem;

@@ -26,6 +26,19 @@ async function getAccounts(url) {
 }
 getAccounts(url)
 
+async function getAccounts() {
+  const response = await fetch('http://localhost:3010/update/', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(accounts),
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err))
+}
+
 //const accounts = getAccounts(url)
 //console.log(accounts)
 
